@@ -24,6 +24,12 @@ Imports:
     sass,
     hexSticker,
     grid,
-    png
+    png,
+    tibble,
+    tidyr,
+    dplyr,
+    memoise,
+    lubridate,
+    rlang
 URL: https://github.com/tjpalanca/watch.something
 BugReports: https://github.com/tjpalanca/watch.something/issues
