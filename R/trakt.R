@@ -78,9 +78,9 @@ trakt_params <- function(params        = list(),
                          runtime_range = NULL,
                          rating        = NULL,
                          rating_range  = NULL,
-                         page          = 1L,
-                         limit         = 100L,
-                         extended      = TRUE) {
+                         page          = NULL,
+                         limit         = NULL,
+                         extended      = NULL) {
   current_year <- lubridate::year(Sys.Date())
   modifyList(
     params,
@@ -113,27 +113,67 @@ trakt_params <- function(params        = list(),
           pmin(rating + rating_range, 100)
         )
       },
-      extended = if (extended) "full",
+      extended = if (!is.null(extended)) if (extended) "full",
       page     = format(page, scientific = FALSE),
       limit    = format(limit, scientific = FALSE)
     )
   )
 }
 
-trakt_search <- memoise(function(type = "both", ...,
+trakt_search <- memoise(function(...,
+                                 type = "both",
+                                 limit = 100L,
+                                 extended = TRUE,
                                  current = timeout(86400)) {
   bind_rows(
     if (type %in% c("both", "movie")) {
-      trakt_call("search/movie", query = trakt_params(...)) %>%
+      trakt_call(path  = "search/movie",
+                 query = trakt_params(...,
+                                      extended = extended,
+                                      limit = limit)) %>%
         tibble(item = .) %>%
         unnest_wider(item) %>%
         unnest_wider(movie)
     },
     if (type %in% c("both", "show")) {
-      trakt_call("search/show", query = trakt_params(...))  %>%
+      trakt_call(path  = "search/show",
+                 query = trakt_params(...,
+                                      extended = extended,
+                                      limit = limit))  %>%
         tibble(item = .) %>%
         unnest_wider(item) %>%
         unnest_wider(show)
     }
-  )
+  ) %>%
+    arrange(desc(score))
+})
+
+trakt_trending <- memoise(function(...,
+                                   type = "both",
+                                   limit = 100L,
+                                   extended = TRUE,
+                                   current = timeout(86400)) {
+  bind_rows(
+    if (type %in% c("both", "movie")) {
+      trakt_call(path  = "movies/trending",
+                 query = trakt_params(...,
+                                      extended = extended,
+                                      limit = limit)) %>%
+        tibble(item = .) %>%
+        mutate(type = "movie") %>%
+        unnest_wider(item) %>%
+        unnest_wider(movie)
+    },
+    if (type %in% c("both", "show")) {
+      trakt_call(path  = "shows/trending",
+                 query = trakt_params(...,
+                                      extended = extended,
+                                      limit = limit))  %>%
+        tibble(item = .) %>%
+        mutate(type = "show") %>%
+        unnest_wider(item) %>%
+        unnest_wider(show)
+    }
+  ) %>%
+    arrange(desc(watchers))
 })
