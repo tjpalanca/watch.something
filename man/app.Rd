@@ -7,7 +7,7 @@
 \alias{app_config}
 \alias{app_resources}
 \alias{run_app}
-\title{Shiny Application}
+\title{Watch Something Shiny App}
 \usage{
 app_ui(request)
 
@@ -37,7 +37,7 @@ run_app(...)
 \item{...}{A series of options to be used inside the app.}
 }
 \description{
-The shiny application is developed using the golem framework.
+Shiny app for deciding what to watch
 }
 \section{Functions}{
 \itemize{

@@ -9,11 +9,12 @@
 #'             add_headers
 #'             with_verbose
 #' @importFrom memoise timeout memoise cache_memory
-#' @importFrom purrr map_dfr
+#' @importFrom purrr map_dfr map_int map
 #' @importFrom tidyr unnest_wider
 #' @importFrom tibble tibble
 #' @importFrom tjutils dev_pkg_inst
 #' @importFrom magrittr %>% %$% %T>%
+#' @importFrom glue glue
 #' @import lubridate
 #' @keywords internal
 "_PACKAGE"
@@ -23,3 +24,8 @@
 ## usethis namespace: start
 ## usethis namespace: end
 NULL
+
+pkg_cache <- function(dir = "~/.cache/watch.something") {
+  if (!dir.exists(dir)) dir.create(dir)
+  memoise::cache_filesystem(dir)
+}

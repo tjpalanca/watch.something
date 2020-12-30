@@ -30,6 +30,15 @@ Imports:
     dplyr,
     memoise,
     lubridate,
-    rlang
+    rlang,
+    glue,
+    viridis
 URL: https://github.com/tjpalanca/watch.something
 BugReports: https://github.com/tjpalanca/watch.something/issues
+Collate: 
+    'app-page.R'
+    'app-theme.R'
+    'app.R'
+    'watch.something-package.R'
+    'tmdb.R'
+    'trakt.R'

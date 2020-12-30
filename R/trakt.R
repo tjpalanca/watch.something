@@ -1,3 +1,5 @@
+#' @include watch.something-package.R
+
 trakt_call <- function(path, ..., verb = "GET",
                        api_key = Sys.getenv("TRAKT_CLIENT_ID")) {
   RETRY(
@@ -26,7 +28,7 @@ trakt_countries <- memoise(function(current = timeout(86400)) {
         unnest_wider(country)
     }) %>%
     distinct(name, code)
-})
+}, cache = pkg_cache())
 
 trakt_genres <- memoise(function(current = timeout(86400)) {
   list(
@@ -39,7 +41,7 @@ trakt_genres <- memoise(function(current = timeout(86400)) {
         unnest_wider(genre)
     }) %>%
     distinct(name, slug)
-})
+}, cache = pkg_cache())
 
 trakt_genres <- memoise(function(current = timeout(86400)) {
   list(
@@ -52,7 +54,7 @@ trakt_genres <- memoise(function(current = timeout(86400)) {
         unnest_wider(genre)
     }) %>%
     distinct(name, slug)
-})
+}, cache = pkg_cache())
 
 trakt_languages <- memoise(function(current = timeout(86400)) {
   list(
@@ -65,7 +67,7 @@ trakt_languages <- memoise(function(current = timeout(86400)) {
         unnest_wider(genre)
     }) %>%
     distinct(name, code)
-})
+}, cache = pkg_cache())
 
 trakt_params <- function(params        = list(),
                          query         = "",
@@ -120,6 +122,24 @@ trakt_params <- function(params        = list(),
   )
 }
 
+trakt_create_item <- function(data, ...) {
+  data %>%
+    mutate(trakt_id = map_int(ids, "trakt")) %>%
+    rowwise(trakt_id) %>%
+    mutate(item = list(list(ids      = ids,
+                            type     = type,
+                            title    = title,
+                            tagline  = tagline,
+                            overview = overview,
+                            genres   = genres,
+                            rating   = rating,
+                            year     = year,
+                            status   = status,
+                            runtime  = runtime,
+                            episodes = aired_episodes))) %>%
+    ungroup()
+}
+
 trakt_search <- memoise(function(...,
                                  type = "both",
                                  limit = 100L,
@@ -145,8 +165,9 @@ trakt_search <- memoise(function(...,
         unnest_wider(show)
     }
   ) %>%
-    arrange(desc(score))
-})
+    arrange(desc(score)) %>%
+    trakt_create_item()
+}, cache = pkg_cache())
 
 trakt_trending <- memoise(function(...,
                                    type = "both",
@@ -175,5 +196,7 @@ trakt_trending <- memoise(function(...,
         unnest_wider(show)
     }
   ) %>%
-    arrange(desc(watchers))
-})
+    arrange(desc(watchers)) %>%
+    trakt_create_item()
+}, cache = pkg_cache())
+

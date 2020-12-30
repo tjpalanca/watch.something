@@ -1,8 +1,8 @@
 #' @title
-#' Shiny Application
+#' Watch Something Shiny App
 #'
 #' @description
-#' The shiny application is developed using the golem framework.
+#' Shiny app for deciding what to watch
 #'
 #' @name app
 NULL
@@ -53,12 +53,20 @@ app_resources <- function() {
             href = "figures/watch.something_hex.png"
         ),
         suppressDependencies("bootstrap"),
+        shinyjs::useShinyjs(),
+        tags$script(
+            src = "https://kit.fontawesome.com/b7c62b184e.js",
+            crossorigin = "anonymous"
+        ),
         htmlDependency(
             name       = read.dcf("DESCRIPTION", "Package"),
             version    = read.dcf("DESCRIPTION", "Version"),
             src        = dev_pkg_inst("app/www/"),
-            stylesheet = "",
-            script     = c("js/uikit.min.js", "js/uikit-icons.min.js")
+            meta       = list(
+                viewport = "width=device-width, initial-scale=1"
+            ),
+            stylesheet = c("custom.css", "bulma.min.css"),
+            script     = ""
         )
     )
 }
