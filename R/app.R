@@ -13,7 +13,7 @@ NULL
 app_ui <- function(request) {
     tagList(
         app_resources(),
-        app_page()
+        app_page("app")
     )
 }
 
@@ -21,7 +21,7 @@ app_ui <- function(request) {
 #' @param input,output,session Internal parameters for {shiny}.
 #' @import shiny
 app_server <- function(input, output, session) {
-    # List the first level callModules here
+    app_page_server("app")
 }
 
 #' @describeIn app Application Configuration
@@ -66,7 +66,7 @@ app_resources <- function() {
                 viewport = "width=device-width, initial-scale=1"
             ),
             stylesheet = c("custom.css", "bulma.min.css"),
-            script     = ""
+            script     = c("button.js")
         )
     )
 }

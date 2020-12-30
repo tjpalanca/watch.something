@@ -47,13 +47,13 @@ body {
 .header-image img {
   display: block;
   max-height: 100px;
-  margin:auto;
+  margin: auto;
   margin-bottom: 10px;
 }
 
-#app {
+.app {
   padding: 10px;
-  max-width: 600px;",
+  max-width: 600px !important;
 }
 
 .decision-buttons {

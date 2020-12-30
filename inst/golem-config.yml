@@ -1,4 +1,5 @@
 default:
   app_prod: no
+  golem_wd: !expr here::here()
 app:
   app_prod: yes
