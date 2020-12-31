@@ -5,6 +5,7 @@
 #' Shiny app for deciding what to watch
 #'
 #' @name app
+#' @include app-ip_address.R
 NULL
 
 #' @describeIn app Application User Interface
@@ -12,6 +13,7 @@ NULL
 #' @import shiny
 app_ui <- function(request) {
     tagList(
+        ip_address_input(request),
         app_resources(),
         app_page("app")
     )
@@ -66,7 +68,7 @@ app_resources <- function() {
                 viewport = "width=device-width, initial-scale=1"
             ),
             stylesheet = c("custom.css", "bulma.min.css"),
-            script     = c("button.js")
+            script     = c("jquery.touchSwipe.min.js")
         )
     )
 }

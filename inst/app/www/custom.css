@@ -1,6 +1,7 @@
 html {
   --lh: 1.5rem;
   line-height: var(--lh);
+  background-color: #fafafa;
 }
 
 .truncate-overflow {
@@ -10,12 +11,14 @@ html {
   overflow: hidden;
   padding-right: 1rem; /* space for ellipsis */
 }
+
 .truncate-overflow::before {
   position: absolute;
   content: "...";
   inset-block-end: 0; /* "bottom" */
   inset-inline-end: 0; /* "right" */
 }
+
 .truncate-overflow::after {
   content: "";
   position: absolute;
@@ -26,14 +29,13 @@ html {
 }
 
 body {
-  background-color: #fafafa;
   height: 100vh;
   width: 100vw;
 }
 
 .cover-image img {
   object-fit: cover;
-  height: 300px;
+  height: 100% !important;
 }
 
 .watch-metadata {
@@ -48,7 +50,7 @@ body {
   display: block;
   max-height: 100px;
   margin: auto;
-  margin-bottom: 10px;
+  padding-bottom: 20px !important;
 }
 
 .app {
@@ -62,4 +64,36 @@ body {
 
 .decision-buttons button {
   font-size: 1.5em;
+}
+
+.myfooter {
+  text-align: center;
+}
+
+.cards-container {
+  height: calc(100vh - 280px);
+}
+
+.swiped {
+  transition: 0.5s ease-out;
+  opacity: 0;
+}
+
+.swiped-right {
+  transition: 0.25s ease-out;
+  transform: translateX(600px) translateY(120px) rotate(20deg);
+}
+
+.swiped-left {
+  transition: 0.25s ease-out;
+  transform: translateX(-600px) translateY(120px) rotate(-20deg);
+}
+
+.swiped-up {
+  transition: 0.25s ease-out;
+  transform: translateY(-100vh);
+}
+
+.card-title {
+  margin-bottom: 0.8rem !important;
 }

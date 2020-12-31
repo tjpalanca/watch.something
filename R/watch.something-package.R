@@ -9,8 +9,8 @@
 #'             add_headers
 #'             with_verbose
 #' @importFrom memoise timeout memoise cache_memory
-#' @importFrom purrr map_dfr map_int map
-#' @importFrom tidyr unnest_wider
+#' @importFrom purrr map_dfr map_int map map_chr
+#' @importFrom tidyr unnest_wider unnest_longer
 #' @importFrom tibble tibble
 #' @importFrom tjutils dev_pkg_inst
 #' @importFrom magrittr %>% %$% %T>%

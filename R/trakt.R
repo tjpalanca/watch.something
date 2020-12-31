@@ -136,7 +136,8 @@ trakt_create_item <- function(data, ...) {
                             year     = year,
                             status   = status,
                             runtime  = runtime,
-                            episodes = aired_episodes))) %>%
+                            episodes = aired_episodes,
+                            trailer  = trailer))) %>%
     ungroup()
 }
 
