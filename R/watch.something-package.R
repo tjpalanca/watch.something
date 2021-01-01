@@ -12,7 +12,7 @@
 #' @importFrom purrr map_dfr map_int map map_chr
 #' @importFrom tidyr unnest_wider unnest_longer
 #' @importFrom tibble tibble
-#' @importFrom tjutils dev_pkg_inst
+#' @import tjutils
 #' @importFrom magrittr %>% %$% %T>%
 #' @importFrom glue glue
 #' @import lubridate
@@ -26,6 +26,7 @@
 NULL
 
 pkg_cache <- function(dir = "~/.cache/watch.something") {
-  if (!dir.exists(dir)) dir.create(dir)
+  if (!dir.exists(dir)) dir.create(dir, recursive = TRUE)
   memoise::cache_filesystem(dir)
 }
+

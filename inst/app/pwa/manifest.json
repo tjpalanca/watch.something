@@ -1,0 +1,16 @@
+{
+  "name": "Watch Something",
+  "theme_color": "#008080",
+  "background_color": "#fafafa",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "start_url": "/p/735ae6d5/",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "figures/watch.something.hex.png",
+      "sizes": "518x600",
+      "type": "image/png"
+    }
+  ]
+}

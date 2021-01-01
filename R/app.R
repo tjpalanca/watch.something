@@ -13,9 +13,18 @@ NULL
 #' @import shiny
 app_ui <- function(request) {
     tagList(
-        ip_address_input(request),
         app_resources(),
-        app_page("app")
+        app_meta(request),
+        app_page("app"),
+        getwd()
+    )
+}
+
+#' @describeIn app Application Meta Interface
+app_meta <- function(request) {
+    tagList(
+        ip_address_input(request),
+        app_pwa_meta()
     )
 }
 
@@ -49,7 +58,7 @@ app_resources <- function() {
     add_resource_path("figures", dev_pkg_inst("figures"))
 
     tags$head(
-        tags$title("Watch Something"),
+        tags$title(app_config("title")),
         tags$link(
             rel  = "shortcut icon",
             href = "figures/watch.something_hex.png"
@@ -60,25 +69,26 @@ app_resources <- function() {
             src = "https://kit.fontawesome.com/b7c62b184e.js",
             crossorigin = "anonymous"
         ),
-        htmlDependency(
-            name       = read.dcf("DESCRIPTION", "Package"),
-            version    = read.dcf("DESCRIPTION", "Version"),
-            src        = dev_pkg_inst("app/www/"),
-            meta       = list(
-                viewport = "width=device-width, initial-scale=1"
-            ),
-            stylesheet = c("custom.css", "bulma.min.css"),
-            script     = c("jquery.touchSwipe.min.js")
+        tags$link(rel = "stylesheet", href = "www/custom.css"),
+        tags$link(rel = "stylesheet", href = "www/bulma.min.css"),
+        tags$script(src = "www/jquery.touchSwipe.min.js"),
+        tags$meta(
+            name    = "viewport",
+            content = "width=device-width, initial-scale=1"
         )
     )
 }
 
 #' @describeIn app Run the Application
+#' @param port the port to be used
+#' @param host the host address to be served
 #' @param ... A series of options to be used inside the app.
 #' @export
 #' @importFrom shiny shinyApp
 #' @importFrom golem with_golem_options
 run_app <- function(...) {
+    options("shiny.port" = app_config("port"),
+            "shiny.host" = app_config("host"))
     with_golem_options(
         app = shinyApp(
             ui = app_ui,

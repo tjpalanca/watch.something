@@ -11,7 +11,6 @@ app_page <- function(id) {
     class = "container app",
     app_header(ns("header")),
     decision_cards(ns("decision_cards")),
-    decision_buttons(ns("decision_buttons")),
     app_footer(ns("footer"))
   )
 }
@@ -21,7 +20,6 @@ app_page_server <- function(id) {
     id,
     function(input, output, session) {
       decision_cards_server("decision_cards")
-      decision <- decision_buttons_server("decision_buttons")
     }
   )
 }

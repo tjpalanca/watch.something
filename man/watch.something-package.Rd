@@ -4,11 +4,11 @@
 \name{watch.something-package}
 \alias{watch.something}
 \alias{watch.something-package}
-\title{watch.something: What the Package Does (One Line, Title Case)}
+\title{watch.something: Watch Something}
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-What the package does (one paragraph).
+An app to decide what ot watch
 }
 \seealso{
 Useful links:

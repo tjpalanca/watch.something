@@ -1,16 +1,18 @@
 decision_cards <- function(id) {
   ns <- NS(id)
-  div(
-    id = ns("cards_container"),
-    class = "container cards-container"
+  tagList(
+    div(
+      id = ns("cards_container"),
+      class = "container cards-container"
+    ),
+    decision_buttons(ns("decision_buttons"))
   )
 }
 
-decision_cards_add <- function(id, item) {
+decision_cards_add <- function(id, item, ...) {
   shinyjs::html(
     id   = id,
-    html = as.character(decision_card(item = item)),
-    add  = TRUE
+    html = as.character(decision_card(item = item))
   )
 }
 
@@ -21,6 +23,14 @@ decision_cards_server <- function(id) {
       decision_cards_add(
         id = "cards_container",
         item = sample_n(trakt_trending(), 1)$item[[1]]
+      )
+      decision <- decision_buttons_server("decision_buttons")
+      observeEvent(
+        decision(),
+        decision_cards_add(
+          id = "cards_container",
+          item = sample_n(trakt_trending(), 1)$item[[1]]
+        )
       )
     }
   )

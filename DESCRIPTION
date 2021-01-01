@@ -1,5 +1,5 @@
 Package: watch.something
-Title: What the Package Does (One Line, Title Case)
+Title: Watch Something
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Troy James",
@@ -7,9 +7,8 @@ Authors@R:
            role = c("aut", "cre"),
            email = "mail@tjpalanca.com",
            comment = c(ORCID = "0000-0002-0610-9213"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+Description: An app to decide what ot watch
+License: AGPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -34,7 +33,8 @@ Imports:
     glue,
     viridis,
     stringr,
-    rgeolocate
+    rgeolocate,
+    jsonlite
 URL: https://github.com/tjpalanca/watch.something
 BugReports: https://github.com/tjpalanca/watch.something/issues
 Collate: 
@@ -45,7 +45,9 @@ Collate:
     'watch.something-package.R'
     'app-ip_address.R'
     'app-page.R'
+    'app-pwa.R'
     'app.R'
     'justwatch.R'
+    'reexport-tjutils.R'
     'tmdb.R'
     'trakt.R'

@@ -3,6 +3,7 @@
 \name{app}
 \alias{app}
 \alias{app_ui}
+\alias{app_meta}
 \alias{app_server}
 \alias{app_config}
 \alias{app_resources}
@@ -10,6 +11,8 @@
 \title{Watch Something Shiny App}
 \usage{
 app_ui(request)
+
+app_meta(request)
 
 app_server(input, output, session)
 
@@ -35,6 +38,10 @@ run_app(...)
 \item{use_parent}{Logical, scan the parent directory for config file.}
 
 \item{...}{A series of options to be used inside the app.}
+
+\item{port}{the port to be used}
+
+\item{host}{the host address to be served}
 }
 \description{
 Shiny app for deciding what to watch
@@ -42,6 +49,8 @@ Shiny app for deciding what to watch
 \section{Functions}{
 \itemize{
 \item \code{app_ui}: Application User Interface
+
+\item \code{app_meta}: Application Meta Interface
 
 \item \code{app_server}: Application Server Logic
 

@@ -1,5 +1,27 @@
 default:
   app_prod: no
   golem_wd: !expr here::here()
+  package: !expr read.dcf("DESCRIPTION")[, "Package"]
+  title: !expr read.dcf("DESCRIPTION")[, "Title"]
+  version: !expr read.dcf("DESCRIPTION")[, "Version"]
+  port: 3838
+  host: "127.0.0.1"
+  pwa:
+    display: fullscreen
+    orientation: portrait
+    theme_color: "#008080"
+    background_color: "#fafafa"
+    scope: "/"
+    start_url: "/"
+    icons:
+    - src  : "figures/watch.something.hex.png"
+      sizes: "518x600"
+      type : "image/png"
+dev:
+  pwa:
+    start_url: !expr paste0('/', rstudioapi::translateLocalUrl("https://localhost:3838"))
+cicd:
+  host: "0.0.0.0"
 app:
   app_prod: yes
+  host: "0.0.0.0"
