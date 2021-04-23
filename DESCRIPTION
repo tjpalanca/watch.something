@@ -47,7 +47,6 @@ Collate:
     'app-pwa.R'
     'app.R'
     'justwatch.R'
-    'reexport-tjutils.R'
     'tmdb.R'
     'trakt.R'
 Suggests: 

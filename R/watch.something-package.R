@@ -12,7 +12,6 @@
 #' @importFrom purrr map_dfr map_int map map_chr
 #' @importFrom tidyr unnest_wider unnest_longer
 #' @importFrom tibble tibble
-#' @import tjutils
 #' @importFrom magrittr %>% %$% %T>%
 #' @importFrom glue glue
 #' @importFrom lubridate days hours as_datetime

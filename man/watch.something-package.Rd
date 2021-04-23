@@ -13,6 +13,7 @@ An app to decide what ot watch
 \seealso{
 Useful links:
 \itemize{
+  \item \url{http://github.tjpalanca.com/watch.something}
   \item \url{https://github.com/tjpalanca/watch.something}
   \item Report bugs at \url{https://github.com/tjpalanca/watch.something/issues}
 }
