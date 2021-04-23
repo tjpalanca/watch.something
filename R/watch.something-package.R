@@ -15,7 +15,7 @@
 #' @import tjutils
 #' @importFrom magrittr %>% %$% %T>%
 #' @importFrom glue glue
-#' @import lubridate
+#' @importFrom lubridate days hours as_datetime
 #' @keywords internal
 "_PACKAGE"
 

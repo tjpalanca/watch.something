@@ -1,7 +1,7 @@
 html {
   --lh: 1.5rem;
   line-height: var(--lh);
-  background-color: #fafafa;
+  background-color: #fafafa !important;
 }
 
 .truncate-overflow {
@@ -30,7 +30,9 @@ html {
 
 body {
   height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   width: 100vw;
+  background-color: #fafafa !important;
 }
 
 .cover-image img {
@@ -72,6 +74,7 @@ body {
 
 .cards-container {
   height: calc(100vh - 280px);
+  height: calc(var(--vh, 1vh) * 100 - 280px);
   overflow-y: scroll;
 }
 
@@ -97,4 +100,8 @@ body {
 
 .card-title {
   margin-bottom: 0.8rem !important;
+}
+
+.card.decision-card {
+  position: absolute;
 }

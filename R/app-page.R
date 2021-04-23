@@ -19,7 +19,10 @@ app_page_server <- function(id) {
   moduleServer(
     id,
     function(input, output, session) {
-      decision_cards_server("decision_cards")
+      cards <- reactive({
+        sample_n(trakt_trending(), 2)
+      })
+      decision_cards_server("decision_cards", cards)
     }
   )
 }

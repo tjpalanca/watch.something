@@ -1,48 +1,53 @@
-FROM tjpalanca/apps:tjutils-v0.5.1
+FROM rocker/r-ver:4.0.5
 MAINTAINER TJ Palanca <mail@tjpalanca.com>
 
-# Package Dependencies
-RUN install2.r -s httr
-RUN install2.r -s magrittr
-RUN install2.r -s shinyjs
-RUN install2.r -s golem
-RUN install2.r -s htmltools
-RUN install2.r -s sass
-RUN install2.r -s hexSticker
-RUN install2.r -s grid
-RUN install2.r -s png
-RUN install2.r -s tibble
-RUN install2.r -s tidyr
-RUN install2.r -s dplyr
-RUN install2.r -s memoise
-RUN install2.r -s lubridate
-RUN install2.r -s rlang
-RUN install2.r -s glue
-RUN install2.r -s viridis
-RUN install2.r -s stringr
-RUN install2.r -s rgeolocate
-RUN install2.r -s jsonlite
+# Linux Dependencies
+RUN apt-get update && apt-get install -y \
+    zlib1g-dev \
+    libssh2-1-dev \
+    libxml2-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    curl \
+    lbzip2 \
+    libpng-dev \
+    libpq-dev \
+    pandoc \
+    libsodium-dev \
+    libxt-dev \
+    libmagick++-dev
+
+# R Environment
+# RUN install2.r renv
+# COPY renv.lock renv.lock
+# RUN Rscript -e 'renv::restore()'
 
 # Make package directory
-RUN mkdir -p /watch.something
-WORKDIR /watch.something
+RUN mkdir -p /src
+WORKDIR /src
 
 # Build assets
 COPY DESCRIPTION DESCRIPTION
 COPY NAMESPACE NAMESPACE
 COPY .Rbuildignore .Rbuildignore
+# COPY .covrignore .covrignore
+# COPY data data
 COPY inst inst
+COPY tests tests
 COPY man man
 COPY R R
+# COPY vignettes vignettes
 
 # Install package
-RUN Rscript -e "devtools::install('.', dependencies = TRUE, upgrade = FALSE)"
+RUN install2.r remotes
+RUN Rscript -e "remotes::install_local('.', dependencies = TRUE, upgrade = FALSE)"
 
 # Post-build assets
 COPY scripts scripts
 COPY README.md README.md
 COPY README.Rmd README.Rmd
+# COPY NEWS.md NEWS.md
+# COPY _pkgdown.yml _pkgdown.yml
 
-# Golem Command
-EXPOSE 3838
-CMD Rscript -e "watch.something::run_app()"
+# Shiny App
+# CMD ["Rscript", "-e", "options(shiny.port = 3838, shiny.host = '0.0.0.0'); run_app();"]

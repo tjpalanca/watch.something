@@ -18,5 +18,5 @@ knitr::opts_chunk$set(
 *A simple app for the indecisive*
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/tjpalanca/watch.something/workflows/R-CMD-check/badge.svg)](https://github.com/tjpalanca/watch.something/actions)
 <!-- badges: end -->
-

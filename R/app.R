@@ -15,8 +15,7 @@ app_ui <- function(request) {
     tagList(
         app_resources(),
         app_meta(request),
-        app_page("app"),
-        getwd()
+        app_page("app")
     )
 }
 
@@ -72,6 +71,7 @@ app_resources <- function() {
         tags$link(rel = "stylesheet", href = "www/custom.css"),
         tags$link(rel = "stylesheet", href = "www/bulma.min.css"),
         tags$script(src = "www/jquery.touchSwipe.min.js"),
+        tags$script(src = "www/custom.js"),
         tags$meta(
             name    = "viewport",
             content = "width=device-width, initial-scale=1"

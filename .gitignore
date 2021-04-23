@@ -1,6 +1,7 @@
 .Rproj.user
-dev/sandbox.R
+scripts/sandbox.R
 .Rhistory
 .Rdata
 .httr-oauth
 .DS_Store
+docs
